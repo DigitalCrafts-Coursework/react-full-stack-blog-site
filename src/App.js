@@ -16,19 +16,15 @@ function App() {
         { name: "Ann", comment: "I'm hungry'" },
       ],
     },
-    {
-      title: "Second blog post",
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
-      comments: [
-        { name: "John", comment: "I liked it" },
-        { name: "Tim", comment: "It stinks!" },
-        { name: "Ann", comment: "I'm hungry'" },
-      ],
-    },
   ]);
 
-  const addNewPost = (newPost) => {};
+  const addNewPost = (newPost) => {
+    console.log("clicked");
+    console.log(newPost);
+    const updatedPosts = [...posts];
+    updatedPosts.push(newPost);
+    setPosts(updatedPosts);
+  };
 
   return (
     <div className="App">
