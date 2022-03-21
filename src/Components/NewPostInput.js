@@ -4,11 +4,7 @@ export default function NewPostInput(props) {
   const [newPost, setNewPost] = useState({
     title: "",
     content: "",
-    comments: [
-      { name: "", comment: "" },
-      { name: "", comment: "" },
-      { name: "", comment: "" },
-    ],
+    comments: [{ name: "", comment: "" }],
   });
 
   const handleChange = (event) => {

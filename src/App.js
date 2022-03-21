@@ -22,6 +22,7 @@ function App() {
 
   const [selectedPost, setSelectedPost] = useState();
 
+  //add new post using form input
   const addNewPost = (newPost) => {
     const updatedPosts = [...posts];
     updatedPosts.push(newPost);
@@ -32,25 +33,58 @@ function App() {
     setPosts(updatedPostsAddedId);
   };
 
+  //set a selected post by clicking on a listed post, data gets sent as props to routed page
   const updateSelectedPost = (selectedId) => {
-    console.log("click");
     const selectedPostDetails = posts.find((post) => {
       return post.id === selectedId;
     });
-    console.log(selectedPostDetails);
     setSelectedPost(selectedPostDetails);
   };
+
+  const updateComments = (newComment) => {
+    console.log("click)");
+    console.log(newComment);
+    // const comments = selectedPost.comments;
+    // console.log(comments);
+    // let updatedPost = selectedPost;
+    // updatedPost.comments.push(newComment);
+    // console.log(updatedPost);
+    // setSelectedPost(updatedPost);
+  };
+
+  //updates posts in the postslist as well as the selected
+  // let updatedPosts = posts;
+  // console.log(posts);
+  // console.log(updatedPosts);
+  // updatedPosts.push(updatedPost);
+  // setPosts(updatedPost);
 
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
-        <NewPostInput addNewPost={addNewPost} />
-        <PostsList posts={posts} updateSelectedPost={updateSelectedPost} />
+
         <Routes>
           <Route
+            path="/"
+            element={
+              <>
+                <NewPostInput addNewPost={addNewPost} />
+                <PostsList
+                  posts={posts}
+                  updateSelectedPost={updateSelectedPost}
+                />
+              </>
+            }
+          ></Route>
+          <Route
             path="/post/:id"
-            element={<Post selectedPost={selectedPost} />}
+            element={
+              <Post
+                selectedPost={selectedPost}
+                updateComments={updateComments}
+              />
+            }
           ></Route>
         </Routes>
       </BrowserRouter>
