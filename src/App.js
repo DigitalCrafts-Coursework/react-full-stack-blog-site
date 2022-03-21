@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Header from "./Components/Header";
 import PostsList from "./Components/PostsList";
 import NewPostInput from "./Components/NewPostInput";
+import Post from "./Components/Post";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 
 function App() {
@@ -18,19 +20,40 @@ function App() {
     },
   ]);
 
+  const [selectedPost, setSelectedPost] = useState();
+
   const addNewPost = (newPost) => {
-    console.log("clicked");
-    console.log(newPost);
     const updatedPosts = [...posts];
     updatedPosts.push(newPost);
-    setPosts(updatedPosts);
+    const updatedPostsAddedId = updatedPosts.map((post) => {
+      const keyValue = { id: Math.floor(Math.random() * 10000) };
+      return { ...post, ...keyValue };
+    });
+    setPosts(updatedPostsAddedId);
+  };
+
+  const updateSelectedPost = (selectedId) => {
+    console.log("click");
+    const selectedPostDetails = posts.find((post) => {
+      return post.id === selectedId;
+    });
+    console.log(selectedPostDetails);
+    setSelectedPost(selectedPostDetails);
   };
 
   return (
     <div className="App">
-      <Header />
-      <NewPostInput addNewPost={addNewPost} />
-      <PostsList posts={posts} />
+      <BrowserRouter>
+        <Header />
+        <NewPostInput addNewPost={addNewPost} />
+        <PostsList posts={posts} updateSelectedPost={updateSelectedPost} />
+        <Routes>
+          <Route
+            path="/post/:id"
+            element={<Post selectedPost={selectedPost} />}
+          ></Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
