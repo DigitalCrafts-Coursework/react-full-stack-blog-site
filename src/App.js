@@ -4,6 +4,7 @@ import PostsList from "./Components/PostsList";
 import NewPostInput from "./Components/NewPostInput";
 import Post from "./Components/Post";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
 import "./App.css";
 
 function App() {
@@ -22,12 +23,14 @@ function App() {
 
   const [selectedPost, setSelectedPost] = useState();
 
-  // useEffect(()=> {
-  //   axios.get("/users.json").then((response) => {
-  //       console.log(response.data);
-  // }, []);
+  //on page load retrieve data from db
+  useEffect(() => {
+    axios.get("/").then((response) => {
+      console.log(response);
+    });
+  });
 
-  //add new post using form input
+  //add new post using form input (also add post to the db)
   const addNewPost = (newPost) => {
     const updatedPosts = [...posts];
     updatedPosts.push(newPost);
@@ -36,6 +39,17 @@ function App() {
       return { ...post, ...keyValue };
     });
     setPosts(updatedPostsAddedId);
+    axios
+      .post("http://localhost:3000/addPost", {
+        newPost: newPost,
+      })
+      .then((res) => {
+        console.log(`statusCode: ${res.status}`);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   //set a selected post by clicking on a listed post, data gets sent as props to routed page
