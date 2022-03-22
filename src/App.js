@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Components/Header";
 import PostsList from "./Components/PostsList";
 import NewPostInput from "./Components/NewPostInput";
@@ -21,6 +21,11 @@ function App() {
   ]);
 
   const [selectedPost, setSelectedPost] = useState();
+
+  // useEffect(()=> {
+  //   axios.get("/users.json").then((response) => {
+  //       console.log(response.data);
+  // }, []);
 
   //add new post using form input
   const addNewPost = (newPost) => {
