@@ -4,10 +4,12 @@ export default function Post(props) {
   const [dropdownVisibility, setDropdownVisibility] = useState(false);
   const [newComment, setNewComment] = useState({ name: "", comment: "" });
 
-  console.log(props.selectedPost);
-  const { id, title, content, comments } = props.selectedPost;
+  const { title, content, comments } = props.selectedPost;
 
-  //!want this to trigger on props change
+  useEffect(() => {
+    console.log("props updated");
+  }, [props.selectedPost]);
+
   const commentElements = comments.map((comment) => {
     return (
       <div key={Math.floor(Math.random() * 10000)}>

@@ -43,13 +43,11 @@ function App() {
 
   const updateComments = (newComment) => {
     console.log("click)");
-    console.log(newComment);
-    // const comments = selectedPost.comments;
-    // console.log(comments);
-    // let updatedPost = selectedPost;
-    // updatedPost.comments.push(newComment);
-    // console.log(updatedPost);
-    // setSelectedPost(updatedPost);
+    const selectedPostCommentsCopy = selectedPost.comments;
+    selectedPostCommentsCopy.push(newComment);
+    const selectedPostCopy = selectedPost;
+    selectedPostCopy.comments = selectedPostCommentsCopy;
+    setSelectedPost(selectedPostCopy);
   };
 
   //updates posts in the postslist as well as the selected
