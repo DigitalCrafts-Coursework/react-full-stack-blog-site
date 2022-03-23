@@ -28,83 +28,47 @@ function App() {
   //on page load retrieve data from db
   useEffect(() => {
     console.log("useEffect triggered");
-    // axios.get("/retrievePostData").then((response) => {
-    //   console.log("data received");
-    //   console.log(response.data);
-    //   const data = response.data;
-    //   //put retrieved data in proper format (with comments section)
-    //   const newArray = [];
-    //   for (let i = 0; i < data.length; i++) {
-    //     newArray.push({
-    //       id: data[i].post_id,
-    //       title: data[i].title,
-    //       content: data[i].content,
-    //       comments: [{ name: data[i].name_, comment: data[i].comment }],
-    //     });
-    //   }
-    //   console.log(newArray);
-    //
-    //
-    const newArray = [
-      {
-        id: 1,
-        title: "First blog post",
-        content:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
-        comments: [{ name: "John", comment: "I liked it" }],
-      },
-      {
-        id: 2,
-        title: "First blog post",
-        content:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
-        comments: [{ name: "Tim", comment: "It stinks!" }],
-      },
-      {
-        id: 2,
-        title: "First blog post",
-        content:
-          "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
-        comments: [{ name: "Ann", comment: "I'm hungry'" }],
-      },
-    ];
-    //
-    //consolidate comments into each post
-    let newArrayWithComments = [];
-    console.log(newArray);
-    for (let i = 0; i < newArray.length; i++) {
-      if (newArrayWithComments.length === 0) {
-        newArrayWithComments.push(newArray[i]);
-        console.log("1");
-      } else if (
-        newArrayWithComments[newArrayWithComments.length - 1].id ===
-        newArray[i].id
-      ) {
-        newArrayWithComments[newArrayWithComments.length - 1].comments.push({
-          name: newArray[i].comments[0].name,
-          comment: newArray[i].comments[0].comment,
+    axios.get("/retrievePostData").then((response) => {
+      console.log("data received");
+      console.log(response.data);
+      const data = response.data;
+      //put retrieved data in proper format (with comments section)
+      const newArray = [];
+      for (let i = 0; i < data.length; i++) {
+        newArray.push({
+          id: data[i].post_id,
+          title: data[i].title,
+          content: data[i].content,
+          comments: [{ name: data[i].name_, comment: data[i].comment }],
         });
-        console.log("2");
-      } else {
-        newArrayWithComments.push(newArray[i]);
-        console.log("3");
       }
-    }
-    console.log(newArrayWithComments);
-
-    //comes in as an array, need to iterate, set up more than one post in db
-    //   const { post_id, title, content, name, comment } = response.data;
-    //   const retrievedPostsArray = [
-    //     {
-    //       id: post_id,
-    //       title: title,
-    //       content: content,
-    //       comments: [{ name: name, comment: comment }],
-    //     },
-    //   ];
-    //   console.log(retrievedPostsArray);
-  });
-  // });
+      console.log(newArray);
+      //consolidate comments into each post
+      let newArrayWithComments = [];
+      console.log(newArray);
+      for (let i = 0; i < newArray.length; i++) {
+        if (newArrayWithComments.length === 0) {
+          newArrayWithComments.push(newArray[i]);
+          console.log("1");
+        } else if (
+          newArrayWithComments[newArrayWithComments.length - 1].id ===
+          newArray[i].id
+        ) {
+          newArrayWithComments[newArrayWithComments.length - 1].comments.push({
+            name: newArray[i].comments[0].name,
+            comment: newArray[i].comments[0].comment,
+          });
+          console.log("2");
+        } else {
+          newArrayWithComments.push(newArray[i]);
+          console.log("3");
+        }
+      }
+      console.log(newArrayWithComments);
+      //add to state
+      setPosts(newArrayWithComments);
+    });
+  }, []);
 
   //add new post using form input (also add post to the db)
   const addNewPost = (newPost) => {
