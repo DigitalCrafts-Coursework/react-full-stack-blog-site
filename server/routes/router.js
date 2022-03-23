@@ -21,19 +21,35 @@ const database = pgPromise(config);
 //   }
 // });
 
-//submit task form
+//add new posts
 router.post("/addPost", async (req, res) => {
-  // console.log(req);
+  const { id, title, content } = req.body.newPost;
   console.log(req.body.newPost);
   console.log("hello");
   res.send("hello");
-  // try {
-  //   let queryString = "INSERT INTO tasks (task) VALUES ($1)";
-  //   await database.none(queryString, [req.body.task]);
-  //   res.redirect("/");
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  try {
+    let queryString =
+      "INSERT INTO posts (post_id, title, content) VALUES ($1, $2, $3)";
+    await database.none(queryString, [id, title, content]);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+//add comments to posts
+router.post("/addComment", async (req, res) => {
+  console.log(req.body.newComment);
+  console.log("hello");
+  const { name, comment } = req.body.newComment;
+  const id = req.body.id;
+  res.send("hello");
+  try {
+    let queryString =
+      "INSERT INTO comments (post_id, name_, comment) VALUES ($1, $2, $3)";
+    await database.none(queryString, [id, name, comment]);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.post("/delete", async (req, res) => {

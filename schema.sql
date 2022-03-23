@@ -1,13 +1,14 @@
 CREATE TABLE posts (
-    id serial primary key,
+    id serial,
+    post_id int primary key not null CHECK (title <> ''),
     title text not null CHECK (title <> ''),
     content text not null CHECK (content <> ''),  
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE comments (
-    id int references posts(id),
-    name_ text not null CHECK (name_ <> ''),
-    comment text not null CHECK (comment <> ''),
+    post_id int references posts(post_id),
+    name_ text CHECK (name_ <> ''),
+    comment text CHECK (comment <> ''),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

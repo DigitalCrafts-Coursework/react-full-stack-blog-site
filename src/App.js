@@ -62,12 +62,24 @@ function App() {
 
   const updateComments = (newComment) => {
     console.log("click)");
-    console.log(newComment);
     const selectedPostCommentsCopy = selectedPost.comments;
     selectedPostCommentsCopy.push(newComment);
     const selectedPostCopy = selectedPost;
     selectedPostCopy.comments = selectedPostCommentsCopy;
     setSelectedPost(selectedPostCopy);
+    console.log(newComment);
+    axios
+      .post("http://localhost:3000/addComment", {
+        newComment: newComment,
+        id: selectedPost.id,
+      })
+      .then((res) => {
+        console.log(`statusCode: ${res.status}`);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   //updates posts in the postslist as well as the selected
