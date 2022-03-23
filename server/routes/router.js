@@ -17,7 +17,7 @@ router.get("/retrievePostData", async (req, res) => {
   console.log("in get");
   try {
     const posts = await database.any(
-      "SELECT * FROM posts JOIN comments using (post_id)"
+      "SELECT * FROM posts LEFT JOIN comments using (post_id)"
     );
     console.log(posts);
     res.send(posts);
