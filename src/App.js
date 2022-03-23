@@ -10,6 +10,7 @@ import "./App.css";
 function App() {
   const [posts, setPosts] = useState([
     // {
+    //   id: "",
     //   title: "First blog post",
     //   content:
     //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
@@ -24,11 +25,20 @@ function App() {
   const [selectedPost, setSelectedPost] = useState();
 
   //on page load retrieve data from db
-  // useEffect(() => {
-  //   axios.get("/").then((response) => {
-  //     console.log(response);
-  //   });
-  // });
+  useEffect(() => {
+    console.log("useEffect triggered");
+    axios.get("/retrievePostData").then((response) => {
+      console.log("data received");
+      console.log(response.data);
+      const { post_id, title, content, name, comment } = response.data;
+      setPosts({
+        id: post_id,
+        title: title,
+        content: content,
+        comments: { name: name, comment: comment },
+      });
+    });
+  });
 
   //add new post using form input (also add post to the db)
   const addNewPost = (newPost) => {
