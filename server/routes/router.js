@@ -12,19 +12,21 @@ const config = {
 
 const database = pgPromise(config);
 
-router.get("/", async (req, res) => {
-  try {
-    // const posts = await database.any("SELECT * FROM posts");
-    res.send("posts", posts);
-  } catch (error) {
-    console.log(error);
-  }
-});
+// router.get("/", async (req, res) => {
+//   try {
+//     // const posts = await database.any("SELECT * FROM posts");
+//     res.send("posts", posts);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 //submit task form
 router.post("/addPost", async (req, res) => {
+  // console.log(req);
   console.log(req.body.newPost);
   console.log("hello");
+  res.send("hello");
   // try {
   //   let queryString = "INSERT INTO tasks (task) VALUES ($1)";
   //   await database.none(queryString, [req.body.task]);

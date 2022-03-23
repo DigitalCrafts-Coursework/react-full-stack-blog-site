@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 
 export default function Post(props) {
-  const [dropdownVisibility, setDropdownVisibility] = useState(false);
-  const [newComment, setNewComment] = useState({ name: "", comment: "" });
-
   const { title, content, comments } = props.selectedPost;
 
-  useEffect(() => {
-    console.log("props updated");
-  }, [props.selectedPost]);
+  const [dropdownVisibility, setDropdownVisibility] = useState(false);
+  const [newComment, setNewComment] = useState({ name: "", comment: "" });
+  const [commentSubmitted, setCommentSubmitted] = useState(false);
+
+  // useEffect(() => {
+  //   console.log("comment submitted");
+  // }, [commentSubmitted]);
 
   const commentElements = comments.map((comment) => {
     return (
@@ -26,12 +27,15 @@ export default function Post(props) {
   const handleChange = (event) => {
     const inputName = event.target.name;
     const inputValue = event.target.value;
+    console.log(newComment);
     setNewComment({ ...newComment, [inputName]: inputValue });
+    console.log(newComment);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     props.updateComments(newComment);
+    setCommentSubmitted(!commentSubmitted);
   };
 
   return (
@@ -42,7 +46,7 @@ export default function Post(props) {
         See comments
       </button>
       {dropdownVisibility && (
-        <div>
+        <div className="transition-div">
           <div>{commentElements}</div>
           <div>
             <form onSubmit={handleSubmit}>

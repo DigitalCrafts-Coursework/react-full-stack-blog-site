@@ -2,17 +2,20 @@ import React, { useState } from "react";
 
 export default function NewPostInput(props) {
   const [newPost, setNewPost] = useState({
+    id: "",
     title: "",
     content: "",
-    comments: [{ name: "", comment: "" }],
+    comments: [],
   });
 
   const handleChange = (event) => {
+    const randomNum = Math.floor(Math.random() * 10000);
     const inputName = event.target.name;
     const inputValue = event.target.value;
     setNewPost({
       ...newPost,
       [inputName]: inputValue,
+      id: randomNum,
     });
   };
 

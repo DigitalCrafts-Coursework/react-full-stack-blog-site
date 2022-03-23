@@ -9,34 +9,34 @@ import "./App.css";
 
 function App() {
   const [posts, setPosts] = useState([
-    {
-      title: "First blog post",
-      content:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
-      comments: [
-        { name: "John", comment: "I liked it" },
-        { name: "Tim", comment: "It stinks!" },
-        { name: "Ann", comment: "I'm hungry'" },
-      ],
-    },
+    // {
+    //   title: "First blog post",
+    //   content:
+    //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
+    //   comments: [
+    //     { name: "John", comment: "I liked it" },
+    //     { name: "Tim", comment: "It stinks!" },
+    //     { name: "Ann", comment: "I'm hungry'" },
+    //   ],
+    // },
   ]);
 
   const [selectedPost, setSelectedPost] = useState();
 
   //on page load retrieve data from db
-  useEffect(() => {
-    axios.get("/").then((response) => {
-      console.log(response);
-    });
-  });
+  // useEffect(() => {
+  //   axios.get("/").then((response) => {
+  //     console.log(response);
+  //   });
+  // });
 
   //add new post using form input (also add post to the db)
   const addNewPost = (newPost) => {
     const updatedPosts = [...posts];
     updatedPosts.push(newPost);
     const updatedPostsAddedId = updatedPosts.map((post) => {
-      const keyValue = { id: Math.floor(Math.random() * 10000) };
-      return { ...post, ...keyValue };
+      // const keyValue = { id: Math.floor(Math.random() * 10000) };
+      return { ...post /*, ...keyValue */ };
     });
     setPosts(updatedPostsAddedId);
     axios
@@ -62,6 +62,7 @@ function App() {
 
   const updateComments = (newComment) => {
     console.log("click)");
+    console.log(newComment);
     const selectedPostCommentsCopy = selectedPost.comments;
     selectedPostCommentsCopy.push(newComment);
     const selectedPostCopy = selectedPost;

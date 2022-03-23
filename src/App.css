@@ -8,4 +8,14 @@
 
 .comments-button {
   background-color: lightcoral;
+  transition: all 1s;
 }
+
+.comments-button:hover {
+  background-color: aquamarine;
+  border: 1px solid red;
+}
+
+/* .transition-div {
+  transform: scale(0);
+} */
