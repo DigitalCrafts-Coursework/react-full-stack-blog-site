@@ -24,7 +24,7 @@ export default function NewPostInput(props) {
     props.addNewPost(newPost);
   };
 
-  return (
+  return props.userControls ? (
     <form onSubmit={handleSubmit}>
       <label htmlFor="post-title">Post title</label>
       <input
@@ -44,5 +44,7 @@ export default function NewPostInput(props) {
       />
       <button type="submit">submit</button>
     </form>
+  ) : (
+    <div></div>
   );
 }

@@ -9,21 +9,8 @@ import "./App.css";
 
 function App() {
   const [posts, setPosts] = useState([]);
-  // [
-  // {
-  //   id: "",
-  //   title: "First blog post",
-  //   content:
-  //     "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsum totam magni consectetur incidunt sunt deleniti sapiente atque dicta ex obcaecati!",
-  //   comments: [
-  //     { name: "John", comment: "I liked it" },
-  //     { name: "Tim", comment: "It stinks!" },
-  //     { name: "Ann", comment: "I'm hungry'" },
-  //   ],
-  // },
-  // ]
-
   const [selectedPost, setSelectedPost] = useState();
+  const [userControls, setUserControls] = useState(false);
 
   //on page load retrieve data from db
   useEffect(() => {
@@ -122,27 +109,27 @@ function App() {
       });
   };
 
-  //updates posts in the postslist as well as the selected
-  // let updatedPosts = posts;
-  // console.log(posts);
-  // console.log(updatedPosts);
-  // updatedPosts.push(updatedPost);
-  // setPosts(updatedPost);
+  const activateUserControls = () => {
+    setUserControls(!userControls);
+  };
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Header />
-
+        <Header activateUserControls={activateUserControls} />
         <Routes>
           <Route
             path="/"
             element={
               <>
-                <NewPostInput addNewPost={addNewPost} />
+                <NewPostInput
+                  addNewPost={addNewPost}
+                  userControls={userControls}
+                />
                 <PostsList
                   posts={posts}
                   updateSelectedPost={updateSelectedPost}
+                  userControls={userControls}
                 />
               </>
             }

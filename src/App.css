@@ -6,16 +6,20 @@
   margin-top: 1.5em;
 }
 
+.edit-button {
+  background-color: lightcoral;
+  border: 1px solid aquamarine;
+  border-radius: 0.2em;
+}
+
 .comments-button {
   background-color: lightcoral;
-  transition: all 1s;
+  border: 1px solid aquamarine;
+  border-radius: 0.2em;
+  transition: all 200ms;
 }
 
 .comments-button:hover {
   background-color: aquamarine;
-  border: 1px solid red;
+  border: 1px solid lightcoral;
 }
-
-/* .transition-div {
-  transform: scale(0);
-} */
