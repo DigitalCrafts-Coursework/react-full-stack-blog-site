@@ -3,12 +3,20 @@ const express = require("express"),
   pgPromise = require("pg-promise")();
 
 const config = {
-  host: "localhost",
+  host: "chunee.db.elephantsql.com",
   port: 5432,
-  database: "react_blog",
-  user: "matthewvolny",
-  password: "Ronweasley1@@@",
+  database: "divgwmqz",
+  user: "divgwmqz",
+  password: "QUFXYuwSAv0clTtDMYmiWhZxOFOqKIOS",
 };
+
+// const config = {
+//   host: "localhost",
+//   port: 5432,
+//   database: "react_blog",
+//   user: "matthewvolny",
+//   password: "Ronweasley1@@@",
+// };
 
 const database = pgPromise(config);
 
