@@ -125,10 +125,12 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
+    //refresh page
+    window.location.reload(false);
   };
 
   return (
-    <div className="App">
+    <div className="container">
       <BrowserRouter>
         <Header activateUserControls={activateUserControls} />
         <Routes>

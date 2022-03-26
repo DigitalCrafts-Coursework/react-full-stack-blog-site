@@ -6,6 +6,10 @@
   margin-top: 1.5em;
 }
 
+.container {
+  margin: 0 auto;
+}
+
 .edit-button {
   background-color: lightcoral;
   border: 1px solid aquamarine;
