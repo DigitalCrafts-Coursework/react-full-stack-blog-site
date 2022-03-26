@@ -17,14 +17,20 @@ export default function PostsList(props) {
   const posts = props.posts.map((post) => {
     const randomNum = Math.floor(Math.random() * 10000);
     return (
-      <NavLink
-        to={`/post/${post.id}`}
-        key={randomNum}
-        onClick={() => handleClick(post.id)}
-      >
-        <input type="checkbox" style={{ visibility: checkboxVisibility }} />
-        <div>{post.title}</div>
-      </NavLink>
+      <div>
+        <input
+          type="checkbox"
+          onClick={() => props.deletePost(post.id)}
+          style={{ visibility: checkboxVisibility }}
+        />
+        <NavLink
+          to={`/post/${post.id}`}
+          key={randomNum}
+          onClick={() => handleClick(post.id)}
+        >
+          <div>{post.title}</div>
+        </NavLink>
+      </div>
     );
   });
 

@@ -65,37 +65,38 @@ router.post("/addComment", async (req, res) => {
   }
 });
 
-router.post("/delete", async (req, res) => {
-  console.log(req.body.id); // 1
+router.post("/deletePost", async (req, res) => {
+  console.log(req.body.postId);
   try {
-    let queryString = `DELETE FROM tasks WHERE id = $1`;
-    await database.none(queryString, [req.body.id]);
-    res.redirect("/");
+    let queryString = `DELETE FROM comments WHERE post_id = $1`;
+    await database.none(queryString, [req.body.postId]);
+    let queryStringTwo = `DELETE FROM posts WHERE post_id = $1`;
+    await database.none(queryStringTwo, [req.body.postId]);
   } catch (error) {
     console.log(error);
   }
 });
 
-router.post("/update", async (req, res) => {
-  console.log(req.body.id); // 1
-  try {
-    let queryString = `UPDATE tasks SET completed = 'true' WHERE id = $1`;
-    await database.none(queryString, [req.body.id]);
-    res.redirect("/");
-  } catch (error) {
-    console.log(error);
-  }
-});
+// router.post("/update", async (req, res) => {
+//   console.log(req.body.id); // 1
+//   try {
+//     let queryString = `UPDATE tasks SET completed = 'true' WHERE id = $1`;
+//     await database.none(queryString, [req.body.id]);
+//     res.redirect("/");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
-router.post("/return", async (req, res) => {
-  console.log(req.body); // 1
-  try {
-    let queryString = `UPDATE tasks SET completed = 'false' WHERE id = $1`;
-    await database.none(queryString, [req.body.id]);
-    res.redirect("/");
-  } catch (error) {
-    console.log(error);
-  }
-});
+// router.post("/return", async (req, res) => {
+//   console.log(req.body); // 1
+//   try {
+//     let queryString = `UPDATE tasks SET completed = 'false' WHERE id = $1`;
+//     await database.none(queryString, [req.body.id]);
+//     res.redirect("/");
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
 
 module.exports = router;

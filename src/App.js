@@ -113,6 +113,20 @@ function App() {
     setUserControls(!userControls);
   };
 
+  const deletePost = (postId) => {
+    axios
+      .post("http://localhost:3000/deletePost", {
+        postId: postId,
+      })
+      .then((res) => {
+        console.log(`statusCode: ${res.status}`);
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -130,6 +144,7 @@ function App() {
                   posts={posts}
                   updateSelectedPost={updateSelectedPost}
                   userControls={userControls}
+                  deletePost={deletePost}
                 />
               </>
             }
