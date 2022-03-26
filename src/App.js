@@ -131,37 +131,39 @@ function App() {
 
   return (
     <div className="container">
-      <BrowserRouter>
-        <Header activateUserControls={activateUserControls} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <NewPostInput
-                  addNewPost={addNewPost}
-                  userControls={userControls}
+      <div className="innerContainer">
+        <BrowserRouter>
+          <Header activateUserControls={activateUserControls} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <NewPostInput
+                    addNewPost={addNewPost}
+                    userControls={userControls}
+                  />
+                  <PostsList
+                    posts={posts}
+                    updateSelectedPost={updateSelectedPost}
+                    userControls={userControls}
+                    deletePost={deletePost}
+                  />
+                </>
+              }
+            ></Route>
+            <Route
+              path="/post/:id"
+              element={
+                <Post
+                  selectedPost={selectedPost}
+                  updateComments={updateComments}
                 />
-                <PostsList
-                  posts={posts}
-                  updateSelectedPost={updateSelectedPost}
-                  userControls={userControls}
-                  deletePost={deletePost}
-                />
-              </>
-            }
-          ></Route>
-          <Route
-            path="/post/:id"
-            element={
-              <Post
-                selectedPost={selectedPost}
-                updateComments={updateComments}
-              />
-            }
-          ></Route>
-        </Routes>
-      </BrowserRouter>
+              }
+            ></Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </div>
   );
 }
