@@ -9,7 +9,7 @@ const config = {
   user: "divgwmqz",
   password: "QUFXYuwSAv0clTtDMYmiWhZxOFOqKIOS",
 };
-
+//
 // const config = {
 //   host: "localhost",
 //   port: 5432,
